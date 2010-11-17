@@ -36,6 +36,10 @@ And a blog post which briefly introduces this code can be found here http://labs
 
 ****** Examples ******
 
+import com.examplejob.remoting.FluorineConfig;
+import com.specialmoves.remoting.fluorine.*;
+
+
 //create a connection by providing a custom configuration class
 var fluorineConnection : IFluorineConnection = new FluorineConnection(new FluorineConfig("/Gateway.aspx"));
 //listen out for errors
@@ -45,5 +49,23 @@ fluorineConnection.addEventListener(FluorineErrorEvent.CALL_ERROR, errorHandler,
 var responder : Responder = new Responder(onSuccess, FluorineUtils.onError);
 //make the call
 fluorineConnection.call("Cake.GetSlice", responder, sliceType);
+
+
+function onSuccess(result : *):void
+{
+	trace("success - typed result is returned");
+	trace("Result: " + result);
+}
+
+function errorHandler(event : FluorineErrorEvent):void
+{
+	trace(event);
+}
+
+function onError(result : Object):void
+{
+	trace("error - error object returned - this can be parsed into a FluorineError object");
+	var error:FluorineError = new FluorineError(result);
+}
 
 See src/com/examplejob for a more detailed example.  

@@ -38,6 +38,6 @@ package com.specialmoves.remoting.fluorine {
 		
 		function call(command : String, responder : Responder, ...rest): void;
 		function connect(): void;
-		
+		function addApiPrefix(addPrefix:Boolean):void;
 	}
 }
